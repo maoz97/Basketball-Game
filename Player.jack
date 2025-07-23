@@ -1,0 +1,373 @@
+// This class represents the player in the game
+class Player{
+    // The fields of the class
+    field int right;
+    field int left;
+    field int up;
+    field int down;
+    field int shoot;
+    field int shootRelease;
+    field int posX;
+    field int posY;
+    field int width;
+    field int height;
+    field int velX;
+    field int velY;
+    field int accelerationY;
+    field int powerX;
+    field int powerY;
+    field boolean hasBall;
+    field boolean isShooting;
+    field Ball gameBall;
+
+    // The constructor of the class
+    constructor Player new(int PlayerNumber, Ball gameBall1) {
+        if(PlayerNumber = 1){
+            let right = 68;
+            let left = 65;
+            let up = 87;
+            let down = 83;
+            let shoot = 32;
+            let shootRelease = 88;
+            let posX = 100;
+            let posY = 200;
+            let velX = 0;
+            let velY = 0;
+            let accelerationY = 0;
+        }
+        else{
+            let right = 132;
+            let left = 130;
+            let up = 131;
+            let down = 133;
+            let shoot = 136;
+            let shootRelease = 137;
+            let posX = 350;
+            let posY = 200;
+            let velX = 0;
+            let velY = 0;
+            let accelerationY = 0;
+        }
+        let width = 20;
+        let hasBall = 0;
+        let isShooting = 0;
+        let height = 50;
+        let powerX = 0;
+        let powerY = 0;
+        let accelerationY = 0;
+        let gameBall = gameBall1;
+        return this;
+    }
+
+    // This method updates the player position
+    method void update() {
+        do inputHandler();
+        let velY = velY + accelerationY;
+        let posX = posX + velX;
+        let posY = posY + velY;
+        if (posY > 200) {
+            let posY = 200;
+            let velY = 0;
+            let accelerationY = 0;
+        }
+        if (posX > 470) {
+            let posX = 470;
+            let velX = 0;
+        }
+        if (posX < 40) {
+            let posX = 40;
+            let velX = 0;
+        }
+        if(hasBall){
+            do gameBall.setPos(posX, posY);
+        }
+        return;
+    }
+    
+    // This method returns if the player is shooting
+    method boolean isShooting(){
+        return isShooting;
+    }
+
+    // This method draws the player
+    method void draw() {
+        var int location, memAddress;
+        let location = (posY*32) + (posX/16);
+        let memAddress = 16384+location;
+        do Memory.poke(memAddress +256, -16384);
+        do Memory.poke(memAddress +288, -4096);
+        do Memory.poke(memAddress +320, -2048);
+        do Memory.poke(memAddress +352, -17408);
+        do Memory.poke(memAddress +384, -25088);
+        do Memory.poke(memAddress +416, -28928);
+        do Memory.poke(memAddress +448, -30848);
+        do Memory.poke(memAddress +480, -31808);
+        do Memory.poke(memAddress +512, -32288);
+        do Memory.poke(memAddress +544, -32528);
+        do Memory.poke(memAddress +576, -32656);
+        do Memory.poke(memAddress +608, ~32767);
+        do Memory.poke(memAddress +640, ~32767);
+        do Memory.poke(memAddress +672, ~32767);
+        do Memory.poke(memAddress +704, ~32767);
+        do Memory.poke(memAddress +736, ~32767);
+        do Memory.poke(memAddress +768, ~32767);
+        do Memory.poke(memAddress +800, ~32767);
+        do Memory.poke(memAddress +832, ~32767);
+        do Memory.poke(memAddress +864, ~32767);
+        do Memory.poke(memAddress +896, ~32767);
+        do Memory.poke(memAddress +928, ~32767);
+        do Memory.poke(memAddress +960, ~32767);
+        do Memory.poke(memAddress +992, ~32767);
+        do Memory.poke(memAddress +1024, ~32767);
+        do Memory.poke(memAddress +1056, ~32767);
+        do Memory.poke(memAddress +1088, ~32767);
+        do Memory.poke(memAddress +1120, ~32767);
+        do Memory.poke(memAddress +1152, ~32767);
+        do Memory.poke(memAddress +1184, ~32767);
+        do Memory.poke(memAddress +1216, ~32767);
+        do Memory.poke(memAddress +1248, ~32767);
+        do Memory.poke(memAddress +1280, ~32767);
+        do Memory.poke(memAddress +1312, ~32767);
+        do Memory.poke(memAddress +1344, ~32767);
+        do Memory.poke(memAddress +1376, ~32767);
+        do Memory.poke(memAddress +1408, ~32767);
+        do Memory.poke(memAddress +1440, ~32767);
+        do Memory.poke(memAddress +1472, ~32767);
+        do Memory.poke(memAddress +1504, -2048);
+        do Memory.poke(memAddress +1536, -2048);
+        do Memory.poke(memAddress +1568, 0);
+        do Memory.poke(memAddress +1600, 0);
+        do Memory.poke(memAddress +1632, 0);
+        do Memory.poke(memAddress +1664, 0);
+        do Memory.poke(memAddress +1696, 0);
+        do Memory.poke(memAddress +1728, 0);
+        // column 1
+        do Memory.poke(memAddress +1, 4080);
+        do Memory.poke(memAddress +33, 8184);
+        do Memory.poke(memAddress +65, 7608);
+        do Memory.poke(memAddress +97, 8184);
+        do Memory.poke(memAddress +129, 7128);
+        do Memory.poke(memAddress +161, 7224);
+        do Memory.poke(memAddress +193, 8184);
+        do Memory.poke(memAddress +225, 4080);
+        do Memory.poke(memAddress +257, -1);
+        do Memory.poke(memAddress +289, -1);
+        do Memory.poke(memAddress +321, -1);
+        do Memory.poke(memAddress +353, -1);
+        do Memory.poke(memAddress +385, -1);
+        do Memory.poke(memAddress +417, -1921);
+        do Memory.poke(memAddress +449, -1985);
+        do Memory.poke(memAddress +481, -97);
+        do Memory.poke(memAddress +513, -49);
+        do Memory.poke(memAddress +545, -49);
+        do Memory.poke(memAddress +577, -1841);
+        do Memory.poke(memAddress +609, -1841);
+        do Memory.poke(memAddress +641, -1073);
+        do Memory.poke(memAddress +673, -2017);
+        do Memory.poke(memAddress +705, -961);
+        do Memory.poke(memAddress +737, -1);
+        do Memory.poke(memAddress +769, -1);
+        do Memory.poke(memAddress +801, -1);
+        do Memory.poke(memAddress +833, -1);
+        do Memory.poke(memAddress +865, -1);
+        do Memory.poke(memAddress +897, -1);
+        do Memory.poke(memAddress +929, -1);
+        do Memory.poke(memAddress +961, -961);
+        do Memory.poke(memAddress +993, -961);
+        do Memory.poke(memAddress +1025, -961);
+        do Memory.poke(memAddress +1057, -961);
+        do Memory.poke(memAddress +1089, -961);
+        do Memory.poke(memAddress +1121, -961);
+        do Memory.poke(memAddress +1153, -961);
+        do Memory.poke(memAddress +1185, -961);
+        do Memory.poke(memAddress +1217, -961);
+        do Memory.poke(memAddress +1249, -961);
+        do Memory.poke(memAddress +1281, -961);
+        do Memory.poke(memAddress +1313, -961);
+        do Memory.poke(memAddress +1345, -961);
+        do Memory.poke(memAddress +1377, -961);
+        do Memory.poke(memAddress +1409, -961);
+        do Memory.poke(memAddress +1441, -961);
+        do Memory.poke(memAddress +1473, -961);
+        do Memory.poke(memAddress +1505, -961);
+        do Memory.poke(memAddress +1537, -961);
+        do Memory.poke(memAddress +1569, 0);
+        do Memory.poke(memAddress +1601, 0);
+        do Memory.poke(memAddress +1633, 0);
+        do Memory.poke(memAddress +1665, 0);
+        do Memory.poke(memAddress +1697, 0);
+        do Memory.poke(memAddress +1729, 0);
+        // column 2
+        do Memory.poke(memAddress +258, 3);
+        do Memory.poke(memAddress +290, 15);
+        do Memory.poke(memAddress +322, 31);
+        do Memory.poke(memAddress +354, 61);
+        do Memory.poke(memAddress +386, 121);
+        do Memory.poke(memAddress +418, 241);
+        do Memory.poke(memAddress +450, 481);
+        do Memory.poke(memAddress +482, 961);
+        do Memory.poke(memAddress +514, 1921);
+        do Memory.poke(memAddress +546, 3841);
+        do Memory.poke(memAddress +578, 3585);
+        do Memory.poke(memAddress +610, 1);
+        do Memory.poke(memAddress +642, 1);
+        do Memory.poke(memAddress +674, 1);
+        do Memory.poke(memAddress +706, 1);
+        do Memory.poke(memAddress +738, 1);
+        do Memory.poke(memAddress +770, 1);
+        do Memory.poke(memAddress +802, 1);
+        do Memory.poke(memAddress +834, 1);
+        do Memory.poke(memAddress +866, 1);
+        do Memory.poke(memAddress +898, 1);
+        do Memory.poke(memAddress +930, 1);
+        do Memory.poke(memAddress +962, 1);
+        do Memory.poke(memAddress +994, 1);
+        do Memory.poke(memAddress +1026, 1);
+        do Memory.poke(memAddress +1058, 1);
+        do Memory.poke(memAddress +1090, 1);
+        do Memory.poke(memAddress +1122, 1);
+        do Memory.poke(memAddress +1154, 1);
+        do Memory.poke(memAddress +1186, 1);
+        do Memory.poke(memAddress +1218, 1);
+        do Memory.poke(memAddress +1250, 1);
+        do Memory.poke(memAddress +1282, 1);
+        do Memory.poke(memAddress +1314, 1);
+        do Memory.poke(memAddress +1346, 1);
+        do Memory.poke(memAddress +1378, 1);
+        do Memory.poke(memAddress +1410, 1);
+        do Memory.poke(memAddress +1442, 1);
+        do Memory.poke(memAddress +1474, 1);
+        do Memory.poke(memAddress +1506, 31);
+        do Memory.poke(memAddress +1538, 31);
+        do Memory.poke(memAddress +1570, 0);
+        do Memory.poke(memAddress +1602, 0);
+        do Memory.poke(memAddress +1634, 0);
+        do Memory.poke(memAddress +1666, 0);
+        do Memory.poke(memAddress +1698, 0);
+        do Memory.poke(memAddress +1730, 0);
+        if(isShooting){
+            do drawPower();
+        }
+        return;
+    }
+
+    // This method catches the ball
+    method void catchBall(){
+        do gameBall.setCatchable(0);
+        do gameBall.setPos(posX, posY);
+        let hasBall = 1;
+        return;
+    }
+
+    // This method shoots the ball
+    method void shootBall(){
+        do gameBall.setPos(posX + 8, posY + 8);
+        do gameBall.setVelocity(Math.multiply(powerX,2), powerY*2);
+        let hasBall = 0;
+        do gameBall.setCatchable(1);
+        return;
+    }
+
+    // This method returns if the player has the ball
+    method boolean hasBall(){
+        return hasBall;
+    }
+
+    // This method handles the input of the users
+    method void inputHandler(){
+        if (isShooting){
+            if (Keyboard.keyPressed()=right){
+                let powerX = powerX + 1;
+                if(powerX > 25){
+                    let powerX = 25;
+                }
+            }
+            if (Keyboard.keyPressed()=left){
+                let powerX = powerX - 1;
+                if(powerX < -25){
+                    let powerX = -25;
+                }
+            }
+            if (Keyboard.keyPressed()=up){
+                let powerY = powerY - 1;
+                if(powerY < -25){
+                    let powerY = -25;
+                }
+            }
+            if (Keyboard.keyPressed()=down){
+                let powerY = powerY + 1;
+                if(powerY > 0){
+                    let powerY = 0;
+                }
+            }
+            if (Keyboard.keyPressed()=shootRelease){
+                let isShooting = 0;
+                do shootBall();
+                let powerX = 0;
+                let powerY = 0;
+                let accelerationY = 3;
+            }
+            return;
+        }
+        if (Keyboard.keyPressed()=right){
+            let velX = 5;
+        }
+        if (Keyboard.keyPressed()=left){
+            let velX = -5;
+        }
+        if (~(Keyboard.keyPressed()=right) & ~(Keyboard.keyPressed()=left)){
+            let velX = velX*13/16;
+        }
+        if ((Keyboard.keyPressed()=up) & (accelerationY = 0)){
+            let velY = -15;
+            let accelerationY = 3;
+        }
+        if ((Keyboard.keyPressed()=shoot) & hasBall){
+            let velX = 0;
+            let velY = 0;
+            let accelerationY = 0;
+            let isShooting = 1;
+        }
+        return;
+    }
+
+    // This method get the x position of the player
+    method int getPosX(){
+        return posX;
+    }
+    
+    // This method get the y position of the player
+    method int getPosY(){
+        return posY;
+    }
+
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    // this method draws the power bar
+    method void drawPower(){
+        var int targetX, targetY;
+        let targetX = posX + powerX;
+        let targetY = posY + powerY;
+        if (targetX > 500) {
+            let targetX = 500;
+        }
+        if (targetX < 0) {
+            let targetX = 0;
+        }
+        if (targetY > 250) {
+            let targetY = 250;
+        }
+        if (targetY < 0) {
+            let targetY = 0;
+        }
+        do Screen.setColor(1);
+        do Screen.drawLine(posX, posY, targetX, targetY);
+        return;
+    }
+
+
+
+}

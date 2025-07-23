@@ -1,0 +1,350 @@
+// This class is responsible for keeping track of the score of the game and updating it accordingly.
+class ScoreBoard{
+    // The fields of the class
+    field int giladScore;
+    field int ohadScore;
+    field int giladLeftX;
+    field int giladRightX;
+    field int ohadLeftX;
+    field int ohadRightX;
+    field Ball gameBall;
+    field int prewX;
+    field int height;
+    field int prewY;
+    field int giladlocation;
+    field int ohadlocation;
+
+    // The constructor of the class
+    constructor ScoreBoard new(int height1,Ball ball,int giladLeftX1, int giladRightX1, int ohadLeftX1, int ohadRightX1) {
+        let giladScore = 0;
+        let height = height1;
+        let gameBall = ball;
+        let ohadScore = 0;
+        let giladlocation = 323;
+        let ohadlocation = 353;
+        let prewX = ball.getPosX();
+        let prewY = ball.getPosY();
+        let giladLeftX = giladLeftX1;
+        let giladRightX = giladRightX1;
+        let ohadLeftX = ohadLeftX1;
+        let ohadRightX = ohadRightX1;
+        return this;
+    }
+
+    // This method updates the score by postion of the ball and the baskets
+    method void update() {
+        if(prewY < height){
+            if(gameBall.getPosY()> prewY){
+                if((gameBall.getPosX() > giladLeftX) & ((gameBall.getPosX() < giladRightX) & (gameBall.getPosY() > height))){
+                    let giladScore = giladScore + 1;
+                }
+                if((gameBall.getPosX() > ohadLeftX) & ((gameBall.getPosX() < ohadRightX) & (gameBall.getPosY() > height))){
+                    let ohadScore = ohadScore + 1;
+                }
+            }
+        }
+        let prewX = gameBall.getPosX();
+        let prewY = gameBall.getPosY();
+        return;
+    }
+
+    // This method draws the number 1 on the screen
+    method void draw1(int location) {
+    var int memAddress; 
+    let memAddress = 16384+location;
+    // column 0
+    do Memory.poke(memAddress, 96);
+    do Memory.poke(memAddress +32, 112);
+    do Memory.poke(memAddress +64, 120);
+    do Memory.poke(memAddress +96, 108);
+    do Memory.poke(memAddress +128, 102);
+    do Memory.poke(memAddress +160, 96);
+    do Memory.poke(memAddress +192, 96);
+    do Memory.poke(memAddress +224, 96);
+    do Memory.poke(memAddress +256, 96);
+    do Memory.poke(memAddress +288, 96);
+    do Memory.poke(memAddress +320, 96);
+    do Memory.poke(memAddress +352, 1022);
+    do Memory.poke(memAddress +384, 1022);
+    return;
+}
+
+    // This method draws the number 2 on the screen
+    method void draw2(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 510);
+        do Memory.poke(memAddress +32, 510);
+        do Memory.poke(memAddress +64, 510);
+        do Memory.poke(memAddress +96, 384);
+        do Memory.poke(memAddress +128, 384);
+        do Memory.poke(memAddress +160, 384);
+        do Memory.poke(memAddress +192, 510);
+        do Memory.poke(memAddress +224, 510);
+        do Memory.poke(memAddress +256, 6);
+        do Memory.poke(memAddress +288, 6);
+        do Memory.poke(memAddress +320, 510);
+        do Memory.poke(memAddress +352, 510);
+        do Memory.poke(memAddress +384, 510);
+        return;
+    }
+
+    // This method draws the number 3 on the screen
+    method void draw3(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 510);
+        do Memory.poke(memAddress +32, 510);
+        do Memory.poke(memAddress +64, 510);
+        do Memory.poke(memAddress +96, 448);
+        do Memory.poke(memAddress +128, 448);
+        do Memory.poke(memAddress +160, 448);
+        do Memory.poke(memAddress +192, 510);
+        do Memory.poke(memAddress +224, 510);
+        do Memory.poke(memAddress +256, 448);
+        do Memory.poke(memAddress +288, 448);
+        do Memory.poke(memAddress +320, 448);
+        do Memory.poke(memAddress +352, 510);
+        do Memory.poke(memAddress +384, 510);
+        do Memory.poke(memAddress +416, 510);
+        return;
+    }
+
+    // This method draws the number 4 on the screen
+    method void draw4(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 1920);
+        do Memory.poke(memAddress +32, 1984);
+        do Memory.poke(memAddress +64, 2016);
+        do Memory.poke(memAddress +96, 1904);
+        do Memory.poke(memAddress +128, 1848);
+        do Memory.poke(memAddress +160, 1820);
+        do Memory.poke(memAddress +192, 1806);
+        do Memory.poke(memAddress +224, 1806);
+        do Memory.poke(memAddress +256, 8190);
+        do Memory.poke(memAddress +288, 8190);
+        do Memory.poke(memAddress +320, 1792);
+        do Memory.poke(memAddress +352, 1792);
+        do Memory.poke(memAddress +384, 1792);
+        do Memory.poke(memAddress +416, 1792);
+        return;
+    }
+
+    // This method draws the number 5 on the screen
+    method void draw5(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 2046);
+        do Memory.poke(memAddress +32, 2046);
+        do Memory.poke(memAddress +64, 6);
+        do Memory.poke(memAddress +96, 6);
+        do Memory.poke(memAddress +128, 6);
+        do Memory.poke(memAddress +160, 6);
+        do Memory.poke(memAddress +192, 2046);
+        do Memory.poke(memAddress +224, 2046);
+        do Memory.poke(memAddress +256, 1536);
+        do Memory.poke(memAddress +288, 1536);
+        do Memory.poke(memAddress +320, 1536);
+        do Memory.poke(memAddress +352, 1536);
+        do Memory.poke(memAddress +384, 2046);
+        do Memory.poke(memAddress +416, 2046);
+        do Memory.poke(memAddress +448, 2046);
+        return;
+    }
+
+    // This method draws the number 6 on the screen
+    method void draw6(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 1022);
+        do Memory.poke(memAddress +32, 1022);
+        do Memory.poke(memAddress +64, 6);
+        do Memory.poke(memAddress +96, 6);
+        do Memory.poke(memAddress +128, 6);
+        do Memory.poke(memAddress +160, 1022);
+        do Memory.poke(memAddress +192, 1022);
+        do Memory.poke(memAddress +224, 774);
+        do Memory.poke(memAddress +256, 774);
+        do Memory.poke(memAddress +288, 774);
+        do Memory.poke(memAddress +320, 774);
+        do Memory.poke(memAddress +352, 1022);
+        do Memory.poke(memAddress +384, 1022);
+        return;
+    }
+
+    // This method draws the number 7 on the screen
+    method void draw7(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 511);
+        do Memory.poke(memAddress +32, 511);
+        do Memory.poke(memAddress +64, 384);
+        do Memory.poke(memAddress +96, 192);
+        do Memory.poke(memAddress +128, 192);
+        do Memory.poke(memAddress +160, 96);
+        do Memory.poke(memAddress +192, 510);
+        do Memory.poke(memAddress +224, 510);
+        do Memory.poke(memAddress +256, 48);
+        do Memory.poke(memAddress +288, 48);
+        do Memory.poke(memAddress +320, 24);
+        do Memory.poke(memAddress +352, 24);
+        do Memory.poke(memAddress +384, 24);
+        do Memory.poke(memAddress +416, 24);
+        return;
+    }
+
+    // This method draws the number 8 on the screen
+    method void draw8(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 511);
+        do Memory.poke(memAddress +32, 511);
+        do Memory.poke(memAddress +64, 387);
+        do Memory.poke(memAddress +96, 387);
+        do Memory.poke(memAddress +128, 387);
+        do Memory.poke(memAddress +160, 387);
+        do Memory.poke(memAddress +192, 511);
+        do Memory.poke(memAddress +224, 511);
+        do Memory.poke(memAddress +256, 387);
+        do Memory.poke(memAddress +288, 387);
+        do Memory.poke(memAddress +320, 387);
+        do Memory.poke(memAddress +352, 387);
+        do Memory.poke(memAddress +384, 511);
+        do Memory.poke(memAddress +416, 511);
+        return;
+    }
+
+    // This method draws the number 9 on the screen
+    method void draw9(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 511);
+        do Memory.poke(memAddress +32, 511);
+        do Memory.poke(memAddress +64, 387);
+        do Memory.poke(memAddress +96, 387);
+        do Memory.poke(memAddress +128, 387);
+        do Memory.poke(memAddress +160, 387);
+        do Memory.poke(memAddress +192, 511);
+        do Memory.poke(memAddress +224, 511);
+        do Memory.poke(memAddress +256, 384);
+        do Memory.poke(memAddress +288, 384);
+        do Memory.poke(memAddress +320, 384);
+        do Memory.poke(memAddress +352, 511);
+        do Memory.poke(memAddress +384, 511);
+        return;
+    }
+
+    // This method draws the number 0 on the screen
+    method void draw0(int location) {
+        var int memAddress; 
+        let memAddress = 16384+location;
+        // column 0
+        do Memory.poke(memAddress, 508);
+        do Memory.poke(memAddress +32, 1022);
+        do Memory.poke(memAddress +64, 2047);
+        do Memory.poke(memAddress +96, 1799);
+        do Memory.poke(memAddress +128, 1799);
+        do Memory.poke(memAddress +160, 1799);
+        do Memory.poke(memAddress +192, 1799);
+        do Memory.poke(memAddress +224, 1799);
+        do Memory.poke(memAddress +256, 1799);
+        do Memory.poke(memAddress +288, 1799);
+        do Memory.poke(memAddress +320, 1799);
+        do Memory.poke(memAddress +352, 2047);
+        do Memory.poke(memAddress +384, 1022);
+        do Memory.poke(memAddress +416, 508);
+        return;
+    }
+
+    // This method draws the score on the screen
+    method void draw(){
+        var int location;
+        let location = giladlocation;
+        if(giladScore = 0){
+            do draw0(location);
+        }
+        if(giladScore = 1){
+            do draw1(location);
+        }
+        if(giladScore = 2){
+            do draw2(location);
+        }
+        if(giladScore = 3){
+            do draw3(location);
+        }
+        if(giladScore = 4){
+            do draw4(location);
+        }
+        if(giladScore = 5){
+            do draw5(location);
+        }
+        if(giladScore = 6){
+            do draw6(location);
+        }
+        if(giladScore = 7){
+            do draw7(location);
+        }
+        if(giladScore = 8){ 
+            do draw8(location);
+        }
+        if(giladScore = 9){ 
+            do draw9(location);
+        }
+        let location = ohadlocation;
+        if(ohadScore = 0){
+            do draw0(location);
+            }
+        if(ohadScore = 1){
+            do draw1(location);
+        }
+        if(ohadScore = 2){
+            do draw2(location);
+        }
+        if(ohadScore = 3){
+            do draw3(location);
+        }
+        if(ohadScore = 4){  
+            do draw4(location);
+        }
+        if(ohadScore = 5){  
+            do draw5(location);
+        }
+        if(ohadScore = 6){  
+            do draw6(location);
+        }  
+        if(ohadScore = 7){  
+            do draw7(location);
+        }
+        if(ohadScore = 8){  
+            do draw8(location);
+        }
+        if(ohadScore = 9){  
+            do draw9(location);
+        }
+
+        return;
+    }
+
+    // This method returns if the game is over
+    method boolean isGameOver() {
+        if((giladScore > 9) | (ohadScore > 9)){
+            return true;
+        }
+        return false;
+    }
+
+    method void dispose() {
+            do Memory.deAlloc(this);
+            return;
+        }
+
+}

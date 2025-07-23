@@ -1,0 +1,141 @@
+
+// This class represents the ball in the game
+class Ball {
+     // The fields of the class
+     field int posX;
+     field int posY;
+     field int velX;
+     field int velY;
+     field int accelerationY;
+     field int catchableCounter;
+     field boolean catchable;
+
+     // The constructor of the class
+     constructor Ball new() {
+        let posX = 256;
+        let posY = 50;
+        let velX = 0;
+        let velY = 0;
+        let catchableCounter = 0;
+        let catchable = 1;
+        let accelerationY = 10;
+        return this;
+     }
+
+     // This method returns if the ball is catchable
+     method boolean isCatchable() {
+          return catchable;
+     }
+
+     // This method sets the catchable field
+     method void setCatchable(boolean c) {
+          if (c) {
+              let catchableCounter = 16;
+          }else{
+               let catchable = c;
+          }
+          return;
+     }
+
+     // This method updates the ball
+     method void update() {
+          // If the ball is catchable, decrease the catchableCounter
+          let catchableCounter = catchableCounter - 1;
+          if (catchableCounter = 0) {
+               let catchable = 1;
+          }
+          // Update the position of the ball
+          let velY = velY + accelerationY;
+          let posX = posX + velX;
+          let posY = posY + velY;
+          // Check if the ball is out of bounds
+          if (posY > 245) {
+               let posY = 245;
+               let velY = -velY*15/16;
+          }
+          if (posX > 500) {
+               let posX = 500;
+               let velX = -velX*15/16;
+          }
+          if (posX < 10) {
+               let posX = 10;
+               let velX = -velX*15/16;
+          }
+          if (posY < 10) {
+               let posY = 10;
+               let velY = -velY*15/16;
+          }
+          return;
+     }
+
+     // This method draws the ball
+     method void draw() {
+            do Screen.setColor(1);
+            do Screen.drawCircle(posX, posY, 2);
+            return;
+     }
+
+     // This method set the velocity of the ball
+     method void setVelocity(int x, int y) {
+          let velX = x;
+          let velY = y;
+          return;
+     }
+
+     // This method sets the position of the ball
+     method void setPos(int x, int y) {
+          let posX = x;
+          let posY = y;
+          return;
+     }
+
+     // This method returns the x position of the ball
+     method int getPosX() {
+          return posX;
+     }
+
+     // This method returns the y position of the ball
+     method int getPosY() {
+          return posY;
+     }
+
+     // This method returns the x velocity of the ball
+     method int getVelX() {
+          return velX;
+     }
+
+     // This method returns the y velocity of the ball
+     method int getVelY() {
+          return velY;
+     }
+
+     // This method sets the y velocity of the ball
+     method void setVelY(int y) {
+          let velY = y;
+          return;
+     }
+
+     // This method sets the x velocity of the ball
+     method void setVelX(int x) {
+          let velX = x;
+          return;
+     }
+
+     // This method sets the y acceleration of the ball
+     method void setAccY(int y) {
+          let accelerationY = y;
+          return;
+     }
+
+     // This method returns the y acceleration of the ball
+     method int getAccY() {
+          return accelerationY;
+     }
+
+
+     method void dispose() {
+          do Memory.deAlloc(this);
+          return;
+     }
+
+}

@@ -1,0 +1,133 @@
+// This file is part of nand2tetris, as taught in The Hebrew University, and
+// was written by Aviv Yaish. It is an extension to the specifications given
+// [here](https://www.nand2tetris.org) (Shimon Schocken and Noam Nisan, 2017),
+// as allowed by the Creative Common Attribution-NonCommercial-ShareAlike 3.0
+// Unported [License](https://creativecommons.org/licenses/by-nc-sa/3.0/).
+
+/**
+  * In Jack programs, the first function that runs is always the function "main"
+  * from the class "Main".
+  * You can include as many classes and functions as you want.
+  */
+// This class represents the main class of the game
+class Main {
+  function void main() {
+    // Declare the variables
+    var Ball ball;
+    var Player player1;
+    var Player player2;
+    var Basket basket1;
+    var Basket basket2;
+    var ScoreBoard scoreBoard;
+    var int game_on;
+    var Array arr;
+
+    do Screen.setColor(1);
+    // Create a new instance of the Ball class
+    let ball = Ball.new();
+    do ball.setPos(256, 100);
+    do ball.setVelX(0);
+    do ball.setVelY(-15);
+    
+    // Create a new instance of the Player class
+    let player1 = Player.new(1, ball);
+    let player2 = Player.new(2, ball);
+
+    // Create a new instance of the Basket class
+    let basket1 = Basket.new(50, 60, 2);
+    let basket2 = Basket.new(450, 60, 1);
+    let scoreBoard = ScoreBoard.new(110, ball, 50, 82, 418, 450);
+    
+    // Print a welcome message
+    do Output.printString("Welcome to to The Basketball Game! To end the game press Q");
+    do Sys.wait(2000);
+
+    let game_on = 1;
+    
+    // Main game loop
+    while(game_on=1){
+      // Clear the screen
+      do Screen.clearScreen();
+      
+      // Check if the user wants to end the game
+      if(Keyboard.keyPressed()=81){
+        let game_on=0;
+      }
+      // Update the ball
+      do ball.update();
+
+      // Update the players
+      if (player1.isShooting()){
+        do player1.update();
+      }else{
+        if (player2.isShooting()){
+          do player2.update();
+        }else{
+          do player1.update();
+          do player2.update();
+        }
+      }
+      // Update the baskets
+      do basket1.update1(ball);
+      do basket2.update2(ball);
+
+      // Check if the ball is catchable
+      if(ball.isCatchable()){
+        if (player1.getPosX() < ball.getPosX()){
+          if(player1.getPosX() +20 > ball.getPosX()){
+            if(player1.getPosY() < ball.getPosY()){
+              if(player1.getPosY() +50 > ball.getPosY()){
+                do player1.catchBall();
+              }
+            }
+          }
+        }
+      }
+      if(ball.isCatchable()){
+        if (player2.getPosX() < ball.getPosX()){
+          if(player2.getPosX() +20 > ball.getPosX()){
+            if(player2.getPosY() < ball.getPosY()){
+              if(player2.getPosY() +50 > ball.getPosY()){
+                do player2.catchBall();
+              }
+            }
+          }
+        }
+      }
+      // Update the score
+      do scoreBoard.update();
+      
+      // Draw the ball
+      do ball.draw();
+      // Draw the players
+      do player1.draw();
+      do player2.draw();
+
+
+      // Draw the baskets
+      do basket1.draw();
+      do basket2.draw();
+
+      // Draw the score
+      do scoreBoard.draw();
+
+      if(scoreBoard.isGameOver()){
+        let game_on=0;
+      }
+      // Wait for 36 frames
+      do Sys.wait(36);
+    }
+
+    do Screen.clearScreen();
+    do Output.printString("FINITO");
+    do Sys.wait(1000);
+    do scoreBoard.dispose();
+    do basket1.dispose();
+    do basket2.dispose();
+    do player1.dispose();
+    do player2.dispose();
+    do ball.dispose();
+    return;
+  }
+
+}
